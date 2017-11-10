@@ -1,7 +1,7 @@
 $fn=5;
 
 module beam(w,h,d,j) {
-    translate([0,0,30-1])
+    translate([0,0,d/2+15-1])
     clip(30,30,30,3,7,false );
     minkowski() {
         sphere(r=1);
@@ -24,7 +24,7 @@ module socket_beam(w,h,d,j) {
                 cube([w-j,h-j,d], center=true);
             }
         }
-        translate([0,0,-2])
+        translate([0,0,-d/2+15-2])
         scale([1.06,1.06,1.06])
         clip(w-10,h-10,30,j,7, true);
     }
@@ -108,7 +108,33 @@ module clip(w,h,d, j,k,filled=true) {
 //beam(40,40,30,3);
 
 //translate([0,0,80])
-//socket_beam(40,40,30,4);
+//socket_beam(40,40,180,4);
 
 
-beam(40,40,30,3);
+
+
+
+// now ... an example!
+
+// leg with a ball end (LOL)
+translate([0,0,90]) {
+    difference() {
+        sphere(r=30,center=true,$fn=100);
+        sphere(r=27,center=true,$fn=100);
+        translate([0,0,-30])
+        cube([37,37,60],center=true);
+    }
+}
+socket_beam(40,40,180,4);
+
+
+
+// leg with a hook end
+translate([100,0,0])
+socket_beam(40,40,180,4);
+
+
+
+
+
+//beam(40,40,200,3);
